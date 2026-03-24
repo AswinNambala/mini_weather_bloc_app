@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
-        title:const Text(
+        title: const Text(
           'Weather App',
           style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
         ),
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration:const BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/mountain.png'), fit: BoxFit.cover),
         ),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     filled: true,
                     fillColor: Colors.white,
                     hintText: 'Enter City Names (e,g London, Kochi)',
-                    prefixIcon:const Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onPressed: loading,
-                    child:const Text(
+                    child: const Text(
                       '📍 Search Weather',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     )),
@@ -112,8 +112,9 @@ class _HomePageState extends State<HomePage> {
   void loading() {
     if (searchCtrl.text.isNotEmpty) {
       context.read<WeatherBloc>().add(FetchWeather(searchCtrl.text));
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) =>const WheatherLoading()));
+      searchCtrl.clear();
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const WheatherLoading()));
     } else if (searchCtrl.text.isEmpty) {
       showGlassSnackBar(context, 'Error Identified',
           'Please enter any city name to see weather');
